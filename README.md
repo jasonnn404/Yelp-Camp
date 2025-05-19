@@ -2,7 +2,7 @@
 
 YelpCamp is a comprehensive web application for discovering, reviewing, and sharing campgrounds around the world. It features a Node.js/Express backend with a React frontend, interactive maps, user authentication, and a full review system.
 
-![YelpCamp App](https://res.cloudinary.com/dtj513ynu/image/upload/v1/placeholder)
+![YelpCamp App](README-images\yelpcamp1.png)
 
 ## 🚀 Features
 
@@ -26,6 +26,7 @@ This project uses a modern split architecture:
 ## 🛠️ Technologies Used
 
 ### Backend
+
 - Node.js
 - Express
 - MongoDB
@@ -36,6 +37,7 @@ This project uses a modern split architecture:
 - Helmet (security)
 
 ### Frontend
+
 - React
 - React Router
 - Bootstrap 5
@@ -46,6 +48,7 @@ This project uses a modern split architecture:
 ## 💻 Getting Started
 
 ### Prerequisites
+
 - Node.js (v14+)
 - MongoDB
 - MapTiler API key
@@ -53,17 +56,20 @@ This project uses a modern split architecture:
 ### Installation
 
 1. Clone the repository
+
    ```
    git clone https://github.com/yourusername/YelpCamp.git
    cd YelpCamp
    ```
 
 2. Install backend dependencies
+
    ```
    npm install
    ```
 
 3. Install frontend dependencies
+
    ```
    cd reacttt
    npm install
@@ -81,12 +87,14 @@ This project uses a modern split architecture:
 ### Running the Application
 
 1. Start the Express backend server (port 3000)
+
    ```powershell
    cd D:\codes\Projects\Yelp-Camp
    node app.js
    ```
 
 2. In a separate terminal, start the React frontend (port 3001)
+
    ```powershell
    cd D:\codes\Projects\Yelp-Camp\reacttt
    $env:PORT = "3001"
@@ -126,11 +134,14 @@ public/                   # Static assets
 
 ## 📸 Screenshots
 
-(Add screenshots here)
+![YelpCamp App](README-images\yelpcamp2.png)
+![YelpCamp App](README-images\yelpcamp3.png)
+![YelpCamp App](README-images\yelpcamp4.png)
 
 ## 🔄 API Endpoints
 
 ### Campgrounds
+
 - `GET /api/campgrounds` - Get all campgrounds
 - `GET /api/campgrounds/map-data` - Get campground data optimized for maps
 - `GET /api/campgrounds/:id` - Get a specific campground
@@ -139,24 +150,26 @@ public/                   # Static assets
 - `DELETE /api/campgrounds/:id` - Delete a campground
 
 ### Reviews
+
 - `GET /api/campgrounds/:id/reviews` - Get reviews for a campground
 - `POST /api/campgrounds/:id/reviews` - Create a review
 - `DELETE /api/campgrounds/:id/reviews/:reviewId` - Delete a review
 
 ### Users
+
 - `POST /api/users/register` - Register a new user
 - `POST /api/users/login` - Login a user
 - `GET /api/users/logout` - Logout a user
 
 ## 🔒 Environment Variables
 
-| Variable | Description |
-|----------|-------------|
-| `DB_URL` | MongoDB connection string |
+| Variable                | Description                             |
+| ----------------------- | --------------------------------------- |
+| `DB_URL`                | MongoDB connection string               |
 | `CLOUDINARY_CLOUD_NAME` | Cloudinary cloud name for image storage |
-| `CLOUDINARY_KEY` | Cloudinary API key |
-| `CLOUDINARY_SECRET` | Cloudinary API secret |
-| `MAPBOX_TOKEN` | MapTiler API key |
+| `CLOUDINARY_KEY`        | Cloudinary API key                      |
+| `CLOUDINARY_SECRET`     | Cloudinary API secret                   |
+| `MAPBOX_TOKEN`          | MapTiler API key                        |
 
 ## 🚧 Known Issues and Future Improvements
 
