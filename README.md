@@ -2,7 +2,8 @@
 
 YelpCamp is a comprehensive web application for discovering, reviewing, and sharing campgrounds around the world. It features a Node.js/Express backend with a React frontend, interactive maps, user authentication, and a full review system.
 
-![YelpCamp App](README-images\yelpcamp1.png)
+![yelpcamp1](https://github.com/user-attachments/assets/e5d1369c-d45d-4801-aee9-21cf83b36b23)
+
 
 ## 🚀 Features
 
@@ -134,9 +135,10 @@ public/                   # Static assets
 
 ## 📸 Screenshots
 
-![YelpCamp App](README-images\yelpcamp2.png)
-![YelpCamp App](README-images\yelpcamp3.png)
-![YelpCamp App](README-images\yelpcamp4.png)
+![yelpcamp2](https://github.com/user-attachments/assets/7da61f64-4821-4157-a9da-6e558583b8b2)
+![yelpcamp3](https://github.com/user-attachments/assets/46e4c54c-cae3-4360-8f01-526d161efbc5)
+![yelpcamp4](https://github.com/user-attachments/assets/33b2e9e2-22c0-483b-bd6d-479fdfe52e9a)
+
 
 ## 🔄 API Endpoints
 
