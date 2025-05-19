@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { Container, Form, Button, Row, Col } from 'react-bootstrap';
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { Container, Form, Button, Row, Col } from "react-bootstrap";
 
 const EditCampground = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    title: '',
-    location: '',
+    title: "",
+    location: "",
     price: 0,
-    description: '',
-    deleteImages: []
+    description: "",
+    deleteImages: [],
   });
   const [campground, setCampground] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -29,11 +29,11 @@ const EditCampground = () => {
           location: response.data.location,
           price: response.data.price,
           description: response.data.description,
-          deleteImages: []
+          deleteImages: [],
         });
         setLoading(false);
       } catch (err) {
-        setError('Failed to fetch campground');
+        setError("Failed to fetch campground");
         setLoading(false);
       }
     };
@@ -43,24 +43,24 @@ const EditCampground = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleFileChange = (e) => {
-    setFormData(prev => ({ ...prev, images: e.target.files }));
+    setFormData((prev) => ({ ...prev, images: e.target.files }));
   };
 
   const handleImageDeleteToggle = (filename) => {
-    setFormData(prev => {
+    setFormData((prev) => {
       const deleteImages = [...prev.deleteImages];
       const index = deleteImages.indexOf(filename);
-      
+
       if (index === -1) {
         deleteImages.push(filename);
       } else {
         deleteImages.splice(index, 1);
       }
-      
+
       return { ...prev, deleteImages };
     });
   };
@@ -68,7 +68,7 @@ const EditCampground = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.currentTarget;
-    
+
     if (form.checkValidity() === false) {
       e.stopPropagation();
       setValidated(true);
@@ -79,43 +79,55 @@ const EditCampground = () => {
 
     try {
       const formDataToSend = new FormData();
-      
-      // Append text fields
+
       for (const key in formData) {
-        if (key !== 'images' && key !== 'deleteImages') {
+        if (key !== "images" && key !== "deleteImages") {
           formDataToSend.append(key, formData[key]);
         }
       }
-      
-      // Append image files
+
       if (formData.images) {
         for (let i = 0; i < formData.images.length; i++) {
-          formDataToSend.append('images', formData.images[i]);
+          formDataToSend.append("images", formData.images[i]);
         }
       }
-      
-      // Append deleteImages as array
-      formData.deleteImages.forEach(filename => {
-        formDataToSend.append('deleteImages[]', filename);
+
+      formData.deleteImages.forEach((filename) => {
+        formDataToSend.append("deleteImages[]", filename);
       });
 
       await axios.put(`/api/campgrounds/${id}`, formDataToSend, {
         headers: {
-          'Content-Type': 'multipart/form-data'
-        }
+          "Content-Type": "multipart/form-data",
+        },
       });
-      
+
       navigate(`/campgrounds/${id}`);
     } catch (error) {
-      console.error('Error updating campground:', error);
+      console.error("Error updating campground:", error);
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  if (loading) return <Container><p className="text-center mt-5">Loading...</p></Container>;
-  if (error) return <Container><p className="text-center mt-5 text-danger">{error}</p></Container>;
-  if (!campground) return <Container><p className="text-center mt-5">Campground not found</p></Container>;
+  if (loading)
+    return (
+      <Container>
+        <p className="text-center mt-5">Loading...</p>
+      </Container>
+    );
+  if (error)
+    return (
+      <Container>
+        <p className="text-center mt-5 text-danger">{error}</p>
+      </Container>
+    );
+  if (!campground)
+    return (
+      <Container>
+        <p className="text-center mt-5">Campground not found</p>
+      </Container>
+    );
 
   return (
     <Container>
@@ -202,14 +214,22 @@ const EditCampground = () => {
                   {campground.images.map((img, index) => (
                     <div key={index} className="col">
                       <div className="card">
-                        <img src={img.url} className="card-img-top" alt={`Campground ${index + 1}`} />
+                        <img
+                          src={img.url}
+                          className="card-img-top"
+                          alt={`Campground ${index + 1}`}
+                        />
                         <div className="card-body">
                           <Form.Check
                             type="checkbox"
                             id={`delete-image-${index}`}
                             label="Delete this image"
-                            onChange={() => handleImageDeleteToggle(img.filename)}
-                            checked={formData.deleteImages.includes(img.filename)}
+                            onChange={() =>
+                              handleImageDeleteToggle(img.filename)
+                            }
+                            checked={formData.deleteImages.includes(
+                              img.filename
+                            )}
                           />
                         </div>
                       </div>
@@ -221,9 +241,12 @@ const EditCampground = () => {
 
             <div className="d-grid gap-2">
               <Button variant="primary" type="submit" disabled={isSubmitting}>
-                {isSubmitting ? 'Updating...' : 'Update Campground'}
+                {isSubmitting ? "Updating..." : "Update Campground"}
               </Button>
-              <Button variant="secondary" onClick={() => navigate(`/campgrounds/${id}`)}>
+              <Button
+                variant="secondary"
+                onClick={() => navigate(`/campgrounds/${id}`)}
+              >
                 Cancel
               </Button>
             </div>

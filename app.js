@@ -15,6 +15,7 @@ const LocalStrategy = require("passport-local");
 const User = require("./models/user");
 const helmet = require("helmet");
 const mongoSanitize = require("express-mongo-sanitize");
+const cors = require("cors");
 const userRoutes = require("./routes/users");
 const campgroundRoutes = require("./routes/campgrounds");
 const reviewRoutes = require("./routes/reviews");
@@ -37,8 +38,24 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "public")));
+
+app.use(
+  cors({
+    origin: "http://localhost:3001",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: [
+      "Origin",
+      "X-Requested-With",
+      "Content-Type",
+      "Accept",
+      "Authorization",
+    ],
+  })
+);
+
 app.use(
   mongoSanitize({
     replaceWith: "_",
@@ -82,7 +99,10 @@ const scriptSrcUrls = [
   "https://cdnjs.cloudflare.com/",
   "https://cdn.jsdelivr.net",
   "https://cdn.maptiler.com/",
-  "'unsafe-eval'", // Required for React development
+  "https://api.mapbox.com/",
+  "https://api.tiles.mapbox.com/",
+  "https://api.maptiler.com/maps/",
+  "'unsafe-eval'",
 ];
 const styleSrcUrls = [
   "https://kit-free.fontawesome.com/",
@@ -91,8 +111,17 @@ const styleSrcUrls = [
   "https://use.fontawesome.com/",
   "https://cdn.jsdelivr.net",
   "https://cdn.maptiler.com/",
+  "https://api.mapbox.com/",
+  "https://api.tiles.mapbox.com/",
 ];
-const connectSrcUrls = ["https://api.maptiler.com/"];
+const connectSrcUrls = [
+  "https://api.maptiler.com/",
+  "https://api.mapbox.com/",
+  "https://events.mapbox.com/",
+  "https://a.tiles.mapbox.com/",
+  "https://b.tiles.mapbox.com/",
+  "https://api.maptiler.com/maps/",
+];
 const fontSrcUrls = [];
 app.use(
   helmet.contentSecurityPolicy({
@@ -135,30 +164,21 @@ app.use("/campgrounds", campgroundRoutes);
 app.use("/campgrounds/:id/reviews", reviewRoutes);
 
 // API Routes
-app.use('/api/campgrounds', require('./routes/api/campgrounds'));
-app.use('/api/campgrounds/:id/reviews', require('./routes/api/reviews'));
-app.use('/api/users', require('./routes/api/users'));
+app.use("/api/campgrounds", require("./routes/api/campgrounds"));
+app.use("/api/campgrounds/:id/reviews", require("./routes/api/reviews"));
+app.use("/api/users", require("./routes/api/users"));
 
-// Serve static assets in production
-if (process.env.NODE_ENV === 'production') {
-  // Set static folder
-  app.use(express.static(path.join(__dirname, 'client/build')));
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "client/build")));
 
-  // Any route that is not an API route will be served the React app
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
   });
 } else {
-  // In development mode:
-  // 1. EJS routes still work for testing/development
-  // 2. API routes work
-  // 3. React dev server handles React routes through proxy
-  
   app.get("/", (req, res) => {
     res.render("home");
   });
-  
-  // In development, only unmatched API routes should 404
+
   app.all("/api/*", (req, res, next) => {
     next(new ExpressError("API endpoint not found", 404));
   });

@@ -8,12 +8,12 @@
     "mapbox-gl": "^2.6.1",
     "react": "^17.0.2",
     "react-bootstrap": "^2.10.10",
+    "react-bootstrap-icons": "^1.11.6",
     "react-dom": "^17.0.2",
     "react-map-gl": "^6.1.19",
     "react-router-dom": "^6.30.0",
     "react-scripts": "^5.0.1"
-  },
-  "scripts": {
+  },  "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -24,8 +24,7 @@
       "react-app",
       "react-app/jest"
     ]
-  },
-  "browserslist": {
+  },  "browserslist": {
     "production": [
       ">0.2%",
       "not dead",
@@ -35,7 +34,5 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
-    ]
-  },
-  "proxy": "http://localhost:3000"
+    ]  }
 }

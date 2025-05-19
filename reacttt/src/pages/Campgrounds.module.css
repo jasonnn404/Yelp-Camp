@@ -1,0 +1,71 @@
+.mapContainer {
+  height: 300px;
+  width: 100%;
+  margin-bottom: 2rem;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.addButton {
+  transition: all 0.3s ease;
+  background-color: #38b000 !important;
+  border-color: #38b000 !important;
+}
+
+.addButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15) !important;
+  background-color: #2b9348 !important;
+  border-color: #2b9348 !important;
+}
+
+.pageHeader {
+  position: relative;
+  border-bottom: 2px solid #f8f9fa;
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+}
+
+.campgroundsContainer {
+  margin-top: 2rem;
+  padding-bottom: 3rem;
+}
+
+.cardImage {
+  height: 180px;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.cardContainer:hover .cardImage {
+  transform: scale(1.05);
+}
+
+.locationBadge {
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #333;
+  font-weight: 500;
+  border-radius: 4px;
+}
+
+.cardTitle {
+  font-weight: 700;
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+:global(.hover-shadow) {
+  transition: all 0.3s ease;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+:global(.hover-shadow:hover) {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+:global(.card-img-overlay) {
+  background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 50%);
+}
